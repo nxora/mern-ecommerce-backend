@@ -25,18 +25,8 @@ async function register(req, res) {
         const verifyLink = `${process.env.CLIENT_URL}/verify/${verificationToken}`; 
         await sendMail(email, "Verify your account", `Click to verify your account: ${verifyLink}`);
 
-        const token = jwt.sign(
-            { id: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "7d" }
-        );
-
-      
-        res.status(201).json({
-            message: "User registered",
-            token,
-            user: { id: user._id, name: user.name, email: user.email }
-        });
+            
+        return res.status(201).json({ message: "User registered. Pls check your email to verify your account" });
 
     } catch (err) {
         console.error(err);
@@ -128,7 +118,7 @@ async function verifyEmail(req, res) {
 
 async function googleAuth(req, res){
     try {
-        const { credential } = req.body
+        const { credential, redirect } = req.body
         const ticket = await client.verifyIdToken({
             idToken: credential,
             audience: process.env.CLIENT_ID
@@ -149,7 +139,7 @@ async function googleAuth(req, res){
             { expiresIn: "7d" }
         );
 
-        res.json({ message: "Google login successful", token, user: {id:user.id, name: user.name, email: user.email}})
+        res.json({ message: "Google login successful", token, user: {id:user.id, name: user.name, email: user.email}, redirect: redirect || "/"})
     } catch (err) {
        console.error(err);
        res.status(500).json({ message: "Google Auth failed" })

@@ -19,6 +19,7 @@ async function sendMail(to, subject, text) {
 
         await transporter.sendMail(mailOptions)
         console.log("📨 Email sent to", to);
+        console.log("Attempting to send email to:", to, "from:", process.env.EMAIL_USER);
         
     } catch (err) {
         console.error("Email err", err);
