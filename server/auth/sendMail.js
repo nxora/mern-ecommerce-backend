@@ -6,7 +6,7 @@ async function sendMail(to, subject, text) {
 
     try {
         const { error } = await resend.emails.send({
-            from: `"Parfait Bliss" <${process.env.EMAIL_USER}>`,
+            from: "Parfait Bliss <onboarding@resend.dev>",
             to,
             subject,
             text,
