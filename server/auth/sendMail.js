@@ -1,30 +1,24 @@
-const nodemailer = require("nodemailer")
-async function sendMail(to, subject, text) {
+import { Resend } from "resend";
+
+const resend = new Resend(process.env.RESEND_API_KEY)
+
+export default async function sendMail(to, subject, text) {
+
     try {
-        
-        const transporter = nodemailer.createTransport({
-            service: "gmail", auth: {
-                user: process.env.EMAIL_USER,       
-                pass: process.env.EMAIL_PASS
-
-            }
-        })
-
-        const mailOptions = {
+        const { error } = await resend.emails.send({
             from: `"Parfait Bliss" <${process.env.EMAIL_USER}>`,
             to,
             subject,
-            text
+            text,
+        })
+        if (error) {
+            console.error('Resond API error: ', error);
+            throw new Error("Failed to send Email");
         }
-
-        await transporter.sendMail(mailOptions)
-        console.log("📨 Email sent to", to);
-        console.log("Attempting to send email to:", to, "from:", process.env.EMAIL_USER);
-        
+        console.log("Verification sent to ", to);
     } catch (err) {
-        console.error("Email err", err);
-        throw err
-        
+        console.error('Email sending failed:', err);
+        throw err;
     }
+
 }
-module.exports = sendMail
