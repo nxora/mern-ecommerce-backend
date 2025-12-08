@@ -96,7 +96,7 @@ This middleware protects endpoints like `/api/checkpont`, `/api/cart`, etc.
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com/nxora/mern-ecommerce-backend.git
+git clone https://github.com/davex-ai/mern-ecommerce-backend.git
 cd mern-ecomerce-backend/server
 ```
 
@@ -174,7 +174,7 @@ https://your-render-service-url
 
 ## ❤️ Credits  
 Developed with passion by **Parfait Bliss Team** — powered by modern Node.js engineering.
-- Dev — [Nexora](https://github.com/nxora) 
+- Dev — [Nexora](https://github.com/davex-ai) 
 - Figma — [FIgma File](https://www.figma.com/design/vkcDQmjblgS7lFWIvclVCj/Parfait-Website?node-id=60-393&t=eC9Da9VIqPGxjw0f-0)
 - Credit — [Thanks to](https://github.com/ojoilesanmi)
 
